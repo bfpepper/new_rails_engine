@@ -134,4 +134,17 @@ describe "Invoice endpoint" do
       expect(customers["first_name"]).to eq("Todd")
     end
   end
+  context "GET /invoices/:id/merchant" do
+    it "returns a single merchant" do
+      merchant = create(:merchant, name: "Merchy Merch")
+      invoice = create(:invoice, merchant: merchant)
+
+      get "/api/v1/invoices/#{invoice.id}/merchant"
+
+      customers = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(merchant["name"]).to eq("Merchy Merch")
+    end
+  end
 end
