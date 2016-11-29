@@ -9,5 +9,6 @@ RSpec.describe Merchant, type: :model do
   context "Relationships" do
     it { should have_many(:invoices) }
     it { should have_many(:items) }
+    it { should have_many(:customers) }
   end
 end
