@@ -31,4 +31,9 @@ describe "merchants endpoints" do
       expect(transactions["credit_card_number"]).to eq("1234")
     end
   end
+  context "GET /transactions/find" do
+    it "can find a transaction" do
+
+    end
+  end
 end
