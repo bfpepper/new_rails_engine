@@ -1,8 +1,8 @@
 FactoryGirl.define do
-  factory :item do
-    name "MyString"
-    description "MyString"
-    unit_price 1.5
-    references ""
-  end
+  # factory :item do
+  #   name "MyString"
+  #   description "MyString"
+  #   unit_price 1.5
+  #   references ""
+  # end
 end
