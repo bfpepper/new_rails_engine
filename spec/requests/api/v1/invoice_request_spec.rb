@@ -4,10 +4,7 @@ describe "Invoice endpoint" do
   context "GET /api/v1/invoices" do
     it "returns all invoice" do
 
-      customer = Customer.create(first_name: "Bill", last_name: "Joe")
-      merchant = Merchant.create(name: "That")
-      invoice1 = Invoice.create(merchant_id: "#{merchant.id}", customer_id: "#{customer.id}", status: "complete")
-      invoice2 = Invoice.create(merchant_id: "#{merchant.id}", customer_id: "#{customer.id}", status: "shipped")
+      create_list(:invoice, 2)
 
       get '/api/v1/invoices'
 
@@ -18,10 +15,9 @@ describe "Invoice endpoint" do
     end
 
     it "returns a specific invoice" do
-      customer = Customer.create(first_name: "Bill", last_name: "Joe")
-      merchant = Merchant.create(name: "That")
-      invoice1 = Invoice.create(merchant_id: "#{merchant.id}", customer_id: "#{customer.id}", status: "complete")
-      invoice2 = Invoice.create(merchant_id: "#{merchant.id}", customer_id: "#{customer.id}", status: "shipped")
+
+      invoice1 = create(:invoice)
+      invoice2 = create(:invoice)
 
       get "/api/v1/invoices/#{invoice1.id}"
 
