@@ -35,7 +35,7 @@ describe "merchants endpoints" do
       merchants = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(merchant["name"]).to eq("Find me")
+      expect(merchants["name"]).to eq("Find me")
     end
   end
 end

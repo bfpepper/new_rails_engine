@@ -28,7 +28,7 @@ describe "merchants endpoints" do
       transactions = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(transaction["credit_card_number"]).to eq("1234")
+      expect(transactions["credit_card_number"]).to eq("1234")
     end
   end
 end
