@@ -94,4 +94,17 @@ describe "Invoice endpoint" do
       expect(transactions.count).to eq(2)
     end
   end
+  context "GET /invoices/:id/invoice_items" do
+    it "returns a collection of invoice items" do
+      invoice = create(:invoice)
+      transaction = create_list(:invoice_item, 2, invoice: invoice)
+
+      get "/api/v1/invoices/#{invoice.id}/invoice_items"
+
+      transactions = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(transactions.count).to eq(2)
+    end
+  end
 end
