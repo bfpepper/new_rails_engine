@@ -25,4 +25,17 @@ describe "merchants endpoints" do
       expect(merchant["name"]).to eq("Merchy Merch")
     end
   end
+  context "GET /merchants/find" do
+    it "finds a merchant based on name" do
+      skip
+      merchant = create(:merchant, name: "Find me")
+
+      get "/api/v1/merchants/find?name=#{merchant.name}"
+
+      merchants = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(merchant["name"]).to eq("Find me")
+    end
+  end
 end
