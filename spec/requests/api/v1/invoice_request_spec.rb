@@ -31,7 +31,7 @@ describe "Invoice endpoint" do
   context "GET /invoices/find" do
     let (:invoices) { create(:invoice) }
 
-    it "finds a invoice by id" do
+    it "finds an invoice by id" do
       get "/api/v1/invoices/find?id=#{invoices.id}"
 
       invoice = JSON.parse(response.body)
@@ -39,7 +39,7 @@ describe "Invoice endpoint" do
       expect(response).to be_success
       expect(invoice["id"]).to eq(("#{invoices.id}").to_i)
     end
-    it "finds a invoice by status" do
+    it "finds an invoice by status" do
       get "/api/v1/invoices/find?status=#{invoices.status}"
 
       invoice = JSON.parse(response.body)
@@ -47,7 +47,7 @@ describe "Invoice endpoint" do
       expect(response).to be_success
       expect(invoice["status"]).to eq("#{invoices.status}")
     end
-    it "finds a invoice by customer_id" do
+    it "finds an invoice by customer_id" do
       get "/api/v1/invoices/find?customer_id=#{invoices.customer_id}"
 
       invoice = JSON.parse(response.body)
@@ -55,7 +55,7 @@ describe "Invoice endpoint" do
       expect(response).to be_success
       expect(invoice["customer_id"]).to eq(("#{invoices.customer_id}").to_i)
     end
-    it "finds a invoice by merchant_id" do
+    it "finds an invoice by merchant_id" do
       get "/api/v1/invoices/find?merchant_id=#{invoices.merchant_id}"
 
       invoice = JSON.parse(response.body)
@@ -79,5 +79,59 @@ describe "Invoice endpoint" do
     #   expect(response).to be_success
     #   expect(invoice["updated_at"]).to eq(("#{invoices.updated_at}").to_i)
     # end
+  end
+
+  context "GET /invoices/:id/transactions" do
+    it "returns a collection of transactions" do
+      invoice = create(:invoice)
+      transaction = create_list(:transaction, 2, invoice: invoice)
+
+      get "/api/v1/invoices/#{invoice.id}/transactions"
+
+      transactions = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(transactions.count).to eq(2)
+    end
+  end
+  context "GET /invoices/:id/invoice_items" do
+    it "returns a collection of invoice items" do
+      invoice = create(:invoice)
+      transaction = create_list(:invoice_item, 2, invoice: invoice)
+
+      get "/api/v1/invoices/#{invoice.id}/invoice_items"
+
+      transactions = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(transactions.count).to eq(2)
+    end
+  end
+  context "GET /invoices/:id/items" do
+    it "returns a collection of items" do
+      invoice = create(:invoice)
+      item = create(:item)
+      transaction = create_list(:invoice_item, 2, invoice: invoice, item: item)
+
+      get "/api/v1/invoices/#{invoice.id}/items"
+
+      transactions = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(transactions.count).to eq(2)
+    end
+  end
+  context "GET /invoices/:id/customer" do
+    it "returns a single customer" do
+      invoice = create(:invoice)
+      customer = create(:customer, invoice: invoice)
+
+      get "/api/v1/invoices/#{invoice.id}/customer"
+
+      transactions = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(transactions.count).to eq(1)
+    end
   end
 end
