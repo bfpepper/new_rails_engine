@@ -4,9 +4,7 @@ describe "Items endpoint" do
   context "GET /api/v1/items" do
     it "returns a list of all items" do
 
-      merchant = Merchant.create(name: "Bill")
-      item1  = Item.create(name: "this", description: "that", unit_price: 12.45, merchant_id: "#{merchant.id}")
-      item2  = Item.create(name: "You", description: "that", unit_price: 12.45, merchant_id: "#{merchant.id}")
+      create_list(:item, 2)
 
       get '/api/v1/items'
 
@@ -18,9 +16,8 @@ describe "Items endpoint" do
 
     it "returns the show page for one item" do
 
-      merchant = Merchant.create(name: "Bill")
-      item1  = Item.create(name: "this", description: "that", unit_price: 12.45, merchant_id: "#{merchant.id}")
-      item2  = Item.create(name: "You", description: "that", unit_price: 12.45, merchant_id: "#{merchant.id}")
+      item1 = create(:item)
+      item2 = create(:item)
 
       get "/api/v1/items/#{item1.id}"
       item_show = JSON.parse(response.body)

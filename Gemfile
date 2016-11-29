@@ -25,14 +25,9 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'launchy'
-  gem 'database_cleaner'
   gem 'pry'
   gem 'byebug'
-<<<<<<< HEAD
-  gem 'shoulda-matchers'
-=======
   gem 'shoulda-matchers', '~> 3.1'
->>>>>>> master
 end
 
 group :development do
