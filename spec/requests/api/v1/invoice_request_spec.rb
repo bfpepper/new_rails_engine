@@ -123,15 +123,15 @@ describe "Invoice endpoint" do
   end
   context "GET /invoices/:id/customer" do
     it "returns a single customer" do
-      invoice = create(:invoice)
-      customer = create(:customer, invoice: invoice)
+      customer = create(:customer, first_name: "Todd")
+      invoice = create(:invoice, customer: customer)
 
       get "/api/v1/invoices/#{invoice.id}/customer"
 
-      transactions = JSON.parse(response.body)
+      customers = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(transactions.count).to eq(1)
+      expect(customers["first_name"]).to eq("Todd")
     end
   end
 end
