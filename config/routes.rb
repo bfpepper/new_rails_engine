@@ -12,7 +12,11 @@ Rails.application.routes.draw do
       resources :transactions, only: [:index, :show]
       resources :customers, only: [:index, :show]
       resources :items, only: [:index, :show]
-      resources :invoices, only: [:index, :show]
+      resources :invoices, only: [:index, :show] do
+        scope module: 'invoices' do
+          resources :transactions, only: [:index]
+        end
+      end
       resources :invoice_items, only: [:index, :show]
     end
   end
