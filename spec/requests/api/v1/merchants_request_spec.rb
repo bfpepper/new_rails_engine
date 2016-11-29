@@ -27,7 +27,6 @@ describe "merchants endpoints" do
   end
   context "GET /merchants/find" do
     it "finds a merchant based on name" do
-      skip
       merchant = create(:merchant, name: "Find me")
 
       get "/api/v1/merchants/find?name=#{merchant.name}"
