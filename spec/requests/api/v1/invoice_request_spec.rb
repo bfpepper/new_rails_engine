@@ -27,4 +27,57 @@ describe "Invoice endpoint" do
       expect(invoice["status"]).to eq("#{invoice1.status}")
     end
   end
+
+  context "GET /invoices/find" do
+    let (:invoices) { create(:invoice) }
+
+    it "finds a invoice by id" do
+      get "/api/v1/invoices/find?id=#{invoices.id}"
+
+      invoice = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(invoice["id"]).to eq(("#{invoices.id}").to_i)
+    end
+    it "finds a invoice by status" do
+      get "/api/v1/invoices/find?status=#{invoices.status}"
+
+      invoice = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(invoice["status"]).to eq("#{invoices.status}")
+    end
+    it "finds a invoice by customer_id" do
+      get "/api/v1/invoices/find?customer_id=#{invoices.customer_id}"
+
+      invoice = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(invoice["customer_id"]).to eq(("#{invoices.customer_id}").to_i)
+    end
+    it "finds a invoice by merchant_id" do
+      get "/api/v1/invoices/find?merchant_id=#{invoices.merchant_id}"
+
+      invoice = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(invoice["merchant_id"]).to eq(("#{invoices.merchant_id}").to_i)
+    end
+    # it "finds a invoice by created_at" do
+    #   get "/api/v1/invoices/find?created_at=#{invoices.created_at}"
+    #
+    #   invoice = JSON.parse(response.body)
+    #
+    #   expect(response).to be_success
+    #   expect(invoice["created_at"]).to eq(("#{invoices.created_at}").to_i)
+    # end
+    # it "finds a invoice by updated_at" do
+    #   get "/api/v1/invoices/find?updated_at=#{invoices.updated_at}"
+    #
+    #   invoice = JSON.parse(response.body)
+    #
+    #   expect(response).to be_success
+    #   expect(invoice["updated_at"]).to eq(("#{invoices.updated_at}").to_i)
+    # end
+  end
 end

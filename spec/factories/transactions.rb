@@ -1,12 +1,12 @@
 FactoryGirl.define do
   factory :transaction do
-    invoice Invoice.create(status:"failed", merchant_id: 1, customer_id: 1)
-    credit_card_number
+    association :invoice
     credit_card_expiration_date
+    credit_card_number
     result "success"
   end
   sequence :credit_card_number do |n|
-    "Card ##{n}"
+    "#{n}"
   end
   sequence :credit_card_expiration_date do |n|
     "11/#{n}"
