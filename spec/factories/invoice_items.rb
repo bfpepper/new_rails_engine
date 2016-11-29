@@ -1,8 +1,13 @@
 FactoryGirl.define do
-  # factory :invoice_item do
-  #   item nil
-  #   invoice nil
-  #   quantity 1
-  #   unit_price 1.5
-  # end
+  factory :invoice_item do
+    association :item
+    association :invoice
+    quantity
+    unit_price
+  end
+
+  sequence :quantity do |n|
+    "#{n}"
+  end
+
 end
