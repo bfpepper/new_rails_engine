@@ -59,4 +59,32 @@ describe "merchants endpoints" do
 
   end
 
+  context "GET /merchants/:id/items" do
+    it "returns all the items offered by a merchant" do
+
+      merchant = create(:merchant)
+      items = create_list(:item, 2, merchant: merchant)
+
+      get "/api/v1/merchants/#{merchant.id}/items"
+
+      all_items = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(all_items.count).to eq(2)
+    end
+  end
+
+  context "GET /merchants/:id/invoices" do
+    it "returns all invoices for a given merchant" do
+      merchant = create(:merchant)
+      invoices = create_list(:invoice, 2, merchant: merchant)
+
+      get "/api/v1/merchants/#{merchant.id}/invoices"
+
+      all_invoices = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(all_invoices.count).to eq(2)
+    end
+  end
 end
