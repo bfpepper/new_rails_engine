@@ -3,7 +3,7 @@ FactoryGirl.define do
     name
     description
     unit_price
-    merchant 
+    merchant
   end
 
   sequence :name do |n|

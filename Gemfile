@@ -25,7 +25,6 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'launchy'
-  gem 'database_cleaner'
   gem 'pry'
   gem 'byebug'
   gem 'shoulda-matchers', '~> 3.1'
@@ -33,6 +32,10 @@ end
 
 group :development do
   gem 'listen', '~> 3.0.5'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
