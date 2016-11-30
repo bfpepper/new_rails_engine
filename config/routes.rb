@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         get '/random', to: '/api/v1/merchants/search#random'
         get '/most_items', to: '/api/v1/merchants/most_items#show'
       end
+      
       resources :merchants, only: [:index, :show] do
         get '/favorite_customer', to: '/api/v1/merchants/favorite_customer#show'
         scope module: 'merchants' do
@@ -18,10 +19,13 @@ Rails.application.routes.draw do
         end
       end
 
-      get '/transactions/find_all', to: '/api/v1/transactions/search#index'
-      get '/transactions/random', to: '/api/v1/transactions/search#random'
-      get '/transactions/find', to: '/api/v1/transactions/search#show'
+      namespace :transactions do
+        get '/find_all', to: '/api/v1/transactions/search#index'
+        get '/random', to: '/api/v1/transactions/search#random'
+        get '/find', to: '/api/v1/transactions/search#show'
+      end
       resources :transactions, only: [:index, :show]
+
 
       get '/customers/find', to: '/api/v1/customers/search#show'
       resources :customers, only: [:index, :show] do
