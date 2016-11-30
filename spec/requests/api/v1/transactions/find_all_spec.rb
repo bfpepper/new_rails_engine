@@ -46,8 +46,3 @@ context "Finds all records by a given parameter" do
     expect(trans_list.count).to eq(3)
   end
 end
-
-# "invoice_id"
-# "credit_card_number"
-# "credit_card_expiration_date"
-# "result"
