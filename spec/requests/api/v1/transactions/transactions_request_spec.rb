@@ -47,7 +47,6 @@ describe "transaction endpoints" do
     it "finds a transaction by invoice_id" do
       get "/api/v1/transactions/find?invoice_id=#{transactions.invoice_id}"
 
-      # byebug
       transaction = JSON.parse(response.body)
 
       expect(response).to be_success
@@ -60,14 +59,6 @@ describe "transaction endpoints" do
 
       expect(response).to be_success
       expect(transaction["credit_card_number"]).to eq("#{transactions.credit_card_number}")
-    end
-    it "finds a transaction by credit_card_expiration_date" do
-      get "/api/v1/transactions/find?credit_card_expiration_date=#{transactions.credit_card_expiration_date}"
-
-      transaction = JSON.parse(response.body)
-
-      expect(response).to be_success
-      expect(transaction["credit_card_expiration_date"]).to eq("#{transactions.credit_card_expiration_date}")
     end
     it "finds a transaction by result" do
       get "/api/v1/transactions/find?result=#{transactions.result}"

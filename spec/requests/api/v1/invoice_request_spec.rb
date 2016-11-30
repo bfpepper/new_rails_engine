@@ -147,4 +147,57 @@ describe "Invoice endpoint" do
       expect(merchant["name"]).to eq("Merchy Merch")
     end
   end
+  context "GET /invoices/find_all?given_parameter=search_param" do
+    it "finds all invoices for a given customer_id" do
+      customer = create(:customer)
+      invoice = create_list(:invoice, 3, customer: customer)
+
+      get "/api/v1/invoices/find_all?customer_id=#{customer.id}"
+
+      invoices = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(invoices.count).to eq(3)
+    end
+
+    it "finds all invoices by a given merchant id" do
+      merchant = create(:merchant)
+      invoice = create_list(:invoice, 3, merchant: merchant)
+
+      get "/api/v1/invoices/find_all?merchant_id=#{merchant.id}"
+
+      invoices = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(invoices.count).to eq(3)
+    end
+
+    it "finds all invoices by a given status" do
+      invoices = create_list(:invoice, 2, status: "success")
+      invoice = create(:invoice, status: "fail")
+
+      get "/api/v1/invoices/find_all?status=success"
+
+      correct_invoices = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(correct_invoices.count).to eq(2)
+    end
+  end
+
+  context "GET /invoices/random" do
+    it "returns a random invoice" do
+      invoice1 = create(:invoice)
+      invoice2 = create(:invoice)
+
+      invoice_ids = Invoice.all.pluck(:id)
+
+      get "/api/v1/invoices/random"
+
+      invoice = JSON.parse(response.body)
+
+      expect(response).to be_success
+      invoice_ids.should include(invoice["id"])
+    end
+  end
 end

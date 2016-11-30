@@ -5,4 +5,5 @@ class Transaction < ApplicationRecord
   validates :result, presence: true
 
   scope :successful, -> { where(result: "success") }
+
 end
