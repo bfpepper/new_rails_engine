@@ -94,6 +94,34 @@ describe "merchants endpoints" do
     end
   end
 
+  context "GET /merchants/most_items?quantity=x" do
+    it "ranks merchants by most items" do
+      merchant1 = create(:merchant, name: "Show this")
+      merchant2 = create(:merchant, name: "Show that")
+      merchant3 = create(:merchant, name: "No")
+
+      invoice1 = create(:invoice, merchant: merchant1)
+      invoice2 = create(:invoice, merchant: merchant2)
+      invoice3 = create(:invoice, merchant: merchant3)
+
+      create(:transaction, result: "success", invoice:invoice1)
+      create(:transaction, result: "success", invoice:invoice2)
+      create(:transaction, result: "success", invoice:invoice3)
+
+      create_list(:invoice_item, 2, invoice: invoice1, quantity: 2)
+      create_list(:invoice_item, 2, invoice: invoice2, quantity: 1)
+      create(:invoice_item, invoice: invoice3, quantity: 1)
+
+      get "/api/v1/merchants/most_items?quantity=2"
+
+      all_invoices = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(all_invoices.count).to eq(2)
+      expect(all_invoices.first["name"]).to eq("Show this")
+    end
+  end
+
   context "GET /merchants/:id/items" do
     it "returns all the items offered by a merchant" do
 
@@ -122,4 +150,6 @@ describe "merchants endpoints" do
       expect(all_invoices.count).to eq(2)
     end
   end
+
+
 end
