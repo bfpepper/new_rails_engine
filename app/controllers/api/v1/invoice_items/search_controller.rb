@@ -1,7 +1,16 @@
 class Api::V1::InvoiceItems::SearchController < ApplicationController
 
+  def index
+    render json: InvoiceItem.where(invoice_items_params)
+  end
+
   def show
     render json:InvoiceItem.find_by(invoice_items_params)
+  end
+
+  def random
+    offset = rand(InvoiceItem.count)
+    render json: InvoiceItem.offset(offset).first
   end
 
   private
