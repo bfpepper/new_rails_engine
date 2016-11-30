@@ -190,12 +190,14 @@ describe "Invoice endpoint" do
       invoice1 = create(:invoice)
       invoice2 = create(:invoice)
 
+      invoice_ids = Invoice.all.pluck(:id)
+
       get "/api/v1/invoices/random"
 
       invoice = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(invoice["id"]).to eq(invoice1.id || invoice2.id)
+      invoice_ids.should include(invoice["id"])
     end
   end
 end

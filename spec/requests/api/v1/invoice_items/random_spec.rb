@@ -5,11 +5,13 @@ context "GET /invoice_items/random" do
     invoice_item1 = create(:invoice_item)
     invoice_item2 = create(:invoice_item)
 
+    invoice_item_ids = InvoiceItem.all.pluck(:id)
+
     get '/api/v1/invoice_items/random'
 
-    returned_invoice_item = JSON.parse(response.body)
+    invoice_item = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(returned_invoice_item["id"]).to eq(invoice_item1.id || invoice_item2.id)
+    invoice_item_ids.should include(invoice_item["id"])
   end
 end

@@ -5,14 +5,13 @@ context "it can find a rendom record" do
     merchant1 = create(:merchant)
     merchant2 = create(:merchant)
 
-    merch_id = [merchant1.id, merchant2.id]
-    byebug
+    merch_ids = Merchant.all.pluck(:id)
 
     get "/api/v1/merchants/random"
 
     merchant = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(merchant["id"]).to eq(merchant1.id || merchant2.id)
+    merch_ids.should include(merchant['id'])
   end
 end
