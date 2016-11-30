@@ -8,8 +8,6 @@ class Merchant < ApplicationRecord
   has_many :invoice_items,
     through: :invoices
 
-  validates :name, presence: true, uniqueness: true
-
   def total_revenue(date)
     if date.nil?
         invoices.joins(:transactions, :invoice_items)
