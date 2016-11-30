@@ -80,7 +80,7 @@ describe "merchants endpoints" do
       create(:transaction, result: "success", invoice:invoice2)
       create(:transaction, result: "success", invoice:invoice3)
 
-      create_list(:invoice_item, 2, invoice: invoice1, unit_price: 1)
+      create_list(:invoice_item, 2, invoice: invoice1, unit_price: 2)
       create_list(:invoice_item, 2, invoice: invoice2, unit_price: 1)
       create(:invoice_item, invoice: invoice3, unit_price: 1)
 
@@ -90,6 +90,7 @@ describe "merchants endpoints" do
 
       expect(response).to be_success
       expect(all_invoices.count).to eq(2)
+      expect(all_invoices.first["name"]).to eq("Show this")
     end
   end
 
