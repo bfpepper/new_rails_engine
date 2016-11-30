@@ -159,5 +159,17 @@ describe "Invoice endpoint" do
       expect(response).to be_success
       expect(invoices.count).to eq(3)
     end
+
+    it "finds all invoices by a given merchant id" do
+      merchant = create(:merchant)
+      invoice = create_list(:invoice, 3, merchant: merchant)
+
+      get "/api/v1/invoices/find_all?merchant_id=#{merchant.id}"
+
+      invoices = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(invoices.count).to eq(3)
+    end
   end
 end
