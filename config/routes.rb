@@ -22,7 +22,9 @@ Rails.application.routes.draw do
       resources :transactions, only: [:index, :show]
 
       get '/customers/find', to: '/api/v1/customers/search#show'
-      resources :customers, only: [:index, :show]
+      resources :customers, only: [:index, :show] do
+        get '/favorite_merchant', to: '/api/v1/customers/favorite_merchants#show'
+      end
 
       get '/items/find_all', to: '/api/v1/items/search#index'
       get '/items/random', to: '/api/v1/items/search#random'
