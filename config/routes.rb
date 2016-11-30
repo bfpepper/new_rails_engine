@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get '/merchants/find_all', to: '/api/v1/merchants/search#index'
       get '/merchants/find', to: '/api/v1/merchants/search#show'
+      get '/merchants/random', to: '/api/v1/merchants/search#random'
       get '/invoice_items/find', to: '/api/v1/invoice_items/search#show'
       get '/items/find', to: '/api/v1/items/search#show'
       get '/invoices/find_all', to: '/api/v1/invoices/search#index'
