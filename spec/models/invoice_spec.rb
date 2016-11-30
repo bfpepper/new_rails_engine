@@ -7,10 +7,3 @@ RSpec.describe Invoice, type: :model do
   it { should have_many(:invoice_items) }
   it { should have_many(:items) }
 end
-
-
-
-
-# it { should validate_presence_of(:customer_id) }
-# it { should validate_presence_of(:merchant_id) }
-# it { should validate_presence_of(:status) }
