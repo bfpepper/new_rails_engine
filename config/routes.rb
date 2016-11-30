@@ -2,11 +2,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      get '/merchants/most_revenue', to: '/api/v1/merchants/most_revenue#show'
-      get '/merchants/find_all', to: '/api/v1/merchants/search#index'
-      get '/merchants/find', to: '/api/v1/merchants/search#show'
-      get '/merchants/random', to: '/api/v1/merchants/search#random'
-      get '/merchants/most_items', to: '/api/v1/merchants/most_items#show'
+      namespace :merchants do
+        get '/most_revenue', to: '/api/v1/merchants/most_revenue#show'
+        get '/find_all', to: '/api/v1/merchants/search#index'
+        get '/find', to: '/api/v1/merchants/search#show'
+        get '/random', to: '/api/v1/merchants/search#random'
+        get '/most_items', to: '/api/v1/merchants/most_items#show'
+      end
       resources :merchants, only: [:index, :show] do
         get '/favorite_customer', to: '/api/v1/merchants/favorite_customer#show'
         scope module: 'merchants' do
