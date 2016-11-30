@@ -44,7 +44,7 @@ namespace :load_data do
     data = File.read("data/transactions.csv")
     parsed_data = CSV.parse(data, :headers => true)
     parsed_data.each do |row|
-      Transaction.create(row.to_hash)
+      Transaction.create!(row.to_hash)
     end
   end
   task :all => ["load_data:customers",
