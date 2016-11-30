@@ -44,7 +44,7 @@ describe "Invoice Items endpoint" do
       invoice_item = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(invoice_item["unit_price"]).to eq(("#{invoice_items.unit_price}").to_i)
+      expect(invoice_items["unit_price"]).to eq(("#{invoice_items.unit_price}").to_f)
     end
     it "finds a invoice item by item_id" do
       get "/api/v1/invoice_items/find?item_id=#{invoice_items.item_id}"
