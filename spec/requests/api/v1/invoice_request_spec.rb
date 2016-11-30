@@ -171,5 +171,31 @@ describe "Invoice endpoint" do
       expect(response).to be_success
       expect(invoices.count).to eq(3)
     end
+
+    it "finds all invoices by a given status" do
+      invoices = create_list(:invoice, 2, status: "success")
+      invoice = create(:invoice, status: "fail")
+
+      get "/api/v1/invoices/find_all?status=success"
+
+      correct_invoices = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(correct_invoices.count).to eq(2)
+    end
+  end
+
+  context "GET /invoices/random" do
+    it "returns a random invoice" do
+      invoice1 = create(:invoice)
+      invoice2 = create(:invoice)
+
+      get "/api/v1/invoices/random"
+
+      invoice = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(invoice["id"]).to eq(invoice1.id || invoice2.id)
+    end
   end
 end

@@ -8,6 +8,11 @@ class Api::V1::Invoices::SearchController < ApplicationController
     render json: Invoice.find_by(invoice_params)
   end
 
+  def random
+    offset = rand(Invoice.count)
+    render json: Invoice.offset(offset).first
+  end
+
   private
 
   def invoice_params
