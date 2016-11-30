@@ -8,6 +8,11 @@ class Api::V1::Items::SearchController < ApplicationController
     render json: Item.find_by(items_params)
   end
 
+  def random
+    offset = rand(Item.count)
+    render json: Item.offset(offset).first
+  end
+
   private
 
   def items_params

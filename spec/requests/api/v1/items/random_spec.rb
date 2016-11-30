@@ -5,9 +5,9 @@ context "GET /items/random" do
     item1 = create(:item)
     item2 = create(:item)
 
-    item_ids = Items.all.pluck(:id)
+    item_ids = Item.all.pluck(:id)
 
-    get 'api/v1/items/random'
+    get '/api/v1/items/random'
 
     item = JSON.parse(response.body)
 
@@ -15,11 +15,3 @@ context "GET /items/random" do
     item_ids.should include(item["id"])
   end
 end
-
-
-# invoice_item_ids = InvoiceItem.all.pluck(:id)
-#
-# get '/api/v1/invoice_items/random'
-#
-# invoice_item = JSON.parse(response.body)
-#
