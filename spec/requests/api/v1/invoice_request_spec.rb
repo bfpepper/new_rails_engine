@@ -147,4 +147,17 @@ describe "Invoice endpoint" do
       expect(merchant["name"]).to eq("Merchy Merch")
     end
   end
+  context "GET /invoices/find_all?given_parameter=search_param" do
+    it "finds all invoices for a given customer_id" do
+      customer = create(:customer)
+      invoice = create_list(:invoice, 3, customer: customer)
+
+      get "/api/v1/invoices/find_all?customer_id=#{customer.id}"
+
+      invoices = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(invoices.count).to eq(3)
+    end
+  end
 end
