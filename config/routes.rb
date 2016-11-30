@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get '/merchants/find', to: '/api/v1/merchants/search#show'
       get '/merchants/random', to: '/api/v1/merchants/search#random'
       resources :merchants, only: [:index, :show] do
+        get '/favorite_customer', to: '/api/v1/merchants/favorite_customer#show'
         scope module: 'merchants' do
           resources :items, only: [:index]
           resources :invoices, only: [:index]
