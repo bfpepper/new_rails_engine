@@ -10,7 +10,9 @@ Rails.application.routes.draw do
       get '/invoice_items/find', to: '/api/v1/invoice_items/search#show'
       get '/invoice_items/random', to: '/api/v1/invoice_items/search#random'
 
+      get '/items/find_all', to: '/api/v1/items/search#index'
       get '/items/find', to: '/api/v1/items/search#show'
+      get '/items/random', to: '/api/v1/items/search#random'
 
       get '/invoices/find_all', to: '/api/v1/invoices/search#index'
       get '/invoices/find', to: '/api/v1/invoices/search#show'
@@ -19,7 +21,7 @@ Rails.application.routes.draw do
       get '/transactions/find', to: '/api/v1/transactions/search#show'
 
       get '/customers/find', to: '/api/v1/customers/search#show'
-      
+
       resources :merchants, only: [:index, :show] do
         scope module: 'merchants' do
           resources :items, only: [:index]
