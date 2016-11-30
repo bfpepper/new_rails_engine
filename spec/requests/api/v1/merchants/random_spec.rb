@@ -5,6 +5,9 @@ context "it can find a rendom record" do
     merchant1 = create(:merchant)
     merchant2 = create(:merchant)
 
+    merch_id = [merchant1.id, merchant2.id]
+    byebug
+
     get "/api/v1/merchants/random"
 
     merchant = JSON.parse(response.body)
