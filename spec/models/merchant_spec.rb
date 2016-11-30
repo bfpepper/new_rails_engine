@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  context "Validations" do
-    it { should validate_presence_of(:name) }
-  end
 
   context "Relationships" do
     it { should have_many(:invoices) }
@@ -11,3 +8,8 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:customers) }
   end
 end
+
+
+# context "Validations" do
+#   it { should validate_presence_of(:name) }
+# end
