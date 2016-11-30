@@ -5,26 +5,26 @@ class Merchant < ApplicationRecord
     through: :invoices
   has_many :customers,
     through: :invoices
+  has_many :invoice_items,
+    through: :invoices
 
   validates :name, presence: true, uniqueness: true
 
-  def self.total_revenue(merchant_id, date)
+  def total_revenue(date)
     if date.nil?
-      find(merchant_id)
-        .invoices
-        .joins(:transactions)
+        invoices.joins(:transactions, :invoice_items)
         .merge(Transaction.successful)
-        .joins(:invoice_items)
         .sum("quantity * unit_price")
     else
-      find(merchant_id)
-        .invoices
-        .joins(:transactions)
+        invoices.joins(:transactions, :invoice_items)
         .where(created_at: date)
         .merge(Transaction.successful)
-        .joins(:invoice_items)
         .sum("quantity * unit_price")
     end
+  end
+
+  def self.most_revenue(quantity)
+    Merchant.joins(:invoice_items).select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue").group("merchants.id").limit(quantity)
   end
 
 end

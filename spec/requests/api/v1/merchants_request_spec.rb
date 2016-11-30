@@ -68,7 +68,6 @@ describe "merchants endpoints" do
 
   context "GET /merchants/most_revenue?quantity=x" do
     it "ranks merchants by total revenue" do
-      skip
       merchant1 = create(:merchant, name: "Show this")
       merchant2 = create(:merchant, name: "Show that")
       merchant3 = create(:merchant, name: "No")

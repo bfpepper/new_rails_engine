@@ -1,7 +1,7 @@
 class Api::V1::Merchants::RevenueController < ApplicationController
 
   def show
-    render json: Merchant.total_revenue(params[:merchant_id],params[:date])
+    render json: Merchant.find(params[:merchant_id]).total_revenue(params[:date])
   end
 
 end
