@@ -9,8 +9,7 @@ class Api::V1::Merchants::SearchController < ApplicationController
   end
 
   def random
-    offset = rand(Merchant.count)
-    render json: Merchant.offset(offset).first
+    render json: Merchant.offset(rand(Merchant.count)).first
   end
 
   private
