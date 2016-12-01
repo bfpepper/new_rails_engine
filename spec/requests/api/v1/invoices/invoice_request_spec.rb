@@ -63,22 +63,6 @@ describe "Invoice endpoint" do
       expect(response).to be_success
       expect(invoice["merchant_id"]).to eq(("#{invoices.merchant_id}").to_i)
     end
-    # it "finds a invoice by created_at" do
-    #   get "/api/v1/invoices/find?created_at=#{invoices.created_at}"
-    #
-    #   invoice = JSON.parse(response.body)
-    #
-    #   expect(response).to be_success
-    #   expect(invoice["created_at"]).to eq(("#{invoices.created_at}").to_i)
-    # end
-    # it "finds a invoice by updated_at" do
-    #   get "/api/v1/invoices/find?updated_at=#{invoices.updated_at}"
-    #
-    #   invoice = JSON.parse(response.body)
-    #
-    #   expect(response).to be_success
-    #   expect(invoice["updated_at"]).to eq(("#{invoices.updated_at}").to_i)
-    # end
   end
 
   context "GET /invoices/:id/transactions" do

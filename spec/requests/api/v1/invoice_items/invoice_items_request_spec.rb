@@ -70,21 +70,5 @@ describe "Invoice Items endpoint" do
       expect(response).to be_success
       expect(invoice_item["quantity"]).to eq(("#{invoice_items.quantity}").to_i)
     end
-    # it "finds a invoice item by created_at" do
-    #   get "/api/v1/invoice_items/find?created_at=#{invoice_items.created_at}"
-    #
-    #   invoice_item = JSON.parse(response.body)
-    #
-    #   expect(response).to be_success
-    #   expect(invoice_item["created_at"]).to eq(("#{invoice_items.created_at}").to_i)
-    # end
-    # it "finds a invoice item by updated_at" do
-    #   get "/api/v1/invoice_items/find?updated_at=#{invoice_items.updated_at}"
-    #
-    #   invoice_item = JSON.parse(response.body)
-    #
-    #   expect(response).to be_success
-    #   expect(invoice_item["updated_at"]).to eq(("#{invoice_items.updated_at}").to_i)
-    # end
   end
 end
