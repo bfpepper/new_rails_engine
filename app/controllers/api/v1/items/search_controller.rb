@@ -11,7 +11,7 @@ class Api::V1::Items::SearchController < ApplicationController
   end
 
   def show
-    render json: Item.where(filter).order(:id).first
+    render json: Item.where(filter).first
   end
 
   def random
