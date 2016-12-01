@@ -4,6 +4,10 @@ class Api::V1::Customers::SearchController < ApplicationController
     render json: Customer.find_by(customer_params)
   end
 
+  def random
+    render json: Customer.offset(rand(Customer.count)).first
+  end
+
   private
 
   def customer_params
