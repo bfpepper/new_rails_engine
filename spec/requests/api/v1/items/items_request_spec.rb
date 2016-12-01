@@ -62,9 +62,9 @@ describe "Items endpoint" do
       expect(response).to be_success
       expect(item["merchant_id"]).to eq(("#{items.merchant_id}").to_i)
     end
-    it "finds a item by " do
-      byebug
-      get "/api/v1/items/find?unit_price=#{items['unit_price']}"
+    it "finds a item by unit_price" do
+      price = (items.unit_price)/100
+      get "/api/v1/items/find?unit_price=#{price}"
 
       item = JSON.parse(response.body)
 

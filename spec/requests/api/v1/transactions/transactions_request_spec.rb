@@ -68,21 +68,5 @@ describe "transaction endpoints" do
       expect(response).to be_success
       expect(transaction["result"]).to eq("#{transactions.result}")
     end
-    # it "finds a transaction by created_at" do
-    #   get "/api/v1/transactions/find?created_at=#{transactions.created_at}"
-    #
-    #   transaction = JSON.parse(response.body)
-    #
-    #   expect(response).to be_success
-    #   expect(transaction["created_at"]).to eq(("#{transactions.created_at}").to_i)
-    # end
-    # it "finds a transaction by updated_at" do
-    #   get "/api/v1/transactions/find?updated_at=#{transactions.updated_at}"
-    #
-    #   transaction = JSON.parse(response.body)
-    #
-    #   expect(response).to be_success
-    #   expect(transaction["updated_at"]).to eq(("#{transactions.updated_at}").to_i)
-    # end
   end
 end

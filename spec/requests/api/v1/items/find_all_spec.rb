@@ -25,18 +25,6 @@ context "It finds all records by a given param" do
     expect(items_list.count).to eq(3)
   end
 
-  it "finds all records given a unit_price" do
-
-    create_list(:item, 3, unit_price: (4/100))
-
-    get "/api/v1/items/find_all?unit_price=4"
-
-    items_list = JSON.parse(response.body)
-
-    expect(response).to be_success
-    expect(items_list.count).to eq(3)
-  end
-
   it "finds all records given a merchant_id" do
 
     merch = create(:merchant)

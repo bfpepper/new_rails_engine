@@ -35,15 +35,4 @@ context "It can find all the records for a given search parameter" do
     expect(response).to be_success
     expect(all_invoice_items.count).to eq(3)
   end
-
-  it "can find all records for a given unit_price" do
-    invoice_items = create_list(:invoice_item, 3, unit_price: 60)
-
-    get "/api/v1/invoice_items/find_all?unit_price=60"
-
-    all_invoice_items = JSON.parse(response.body)
-
-    expect(response).to be_success
-    expect(all_invoice_items.count).to eq(3)
-  end
 end
