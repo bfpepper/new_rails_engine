@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       get '/items/find_all', to: '/api/v1/items/search#index'
       get '/items/random', to: '/api/v1/items/search#random'
       get '/items/find', to: '/api/v1/items/search#show'
+      get '/items/most_items', to: '/api/v1/items/most_items#show'
       get '/items/:id/best_day', to: '/api/v1/items/best_day#show'
       resources :items, only: [:index, :show]
 
