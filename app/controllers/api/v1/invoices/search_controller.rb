@@ -9,8 +9,7 @@ class Api::V1::Invoices::SearchController < ApplicationController
   end
 
   def random
-    offset = rand(Invoice.count)
-    render json: Invoice.offset(offset).first
+    render json: Invoice.offset(rand(Invoice.count)).first
   end
 
   private
