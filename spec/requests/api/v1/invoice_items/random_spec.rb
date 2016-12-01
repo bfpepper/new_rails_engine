@@ -12,6 +12,6 @@ context "GET /invoice_items/random" do
     invoice_item = JSON.parse(response.body)
 
     expect(response).to be_success
-    invoice_item_ids.should include(invoice_item["id"])
+    expect(invoice_item_ids).to include(invoice_item["id"])
   end
 end

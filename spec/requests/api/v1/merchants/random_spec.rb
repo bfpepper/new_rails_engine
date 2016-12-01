@@ -12,6 +12,6 @@ context "it can find a rendom record" do
     merchant = JSON.parse(response.body)
 
     expect(response).to be_success
-    merch_ids.should include(merchant['id'])
+    expect(merch_ids).to include(merchant['id'])
   end
 end

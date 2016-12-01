@@ -12,6 +12,6 @@ context "GET /items/random" do
     item = JSON.parse(response.body)
 
     expect(response).to be_success
-    item_ids.should include(item["id"])
+    expect(item_ids).to include(item["id"])
   end
 end

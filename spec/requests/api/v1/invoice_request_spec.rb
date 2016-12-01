@@ -197,7 +197,7 @@ describe "Invoice endpoint" do
       invoice = JSON.parse(response.body)
 
       expect(response).to be_success
-      invoice_ids.should include(invoice["id"])
+      expect(invoice_ids).to include(invoice["id"])
     end
   end
 end
