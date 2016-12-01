@@ -19,14 +19,14 @@ describe "Merchant Revenue" do
       revenue = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(revenue).to eq(8)
+      expect(revenue['revenue']).to eq('0.08')
     end
     it "can get a merchant's revenue for a date" do
       get "/api/v1/merchants/#{@merchant.id}/revenue?date=#{@invoice1.created_at}"
       revenue = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(revenue).to eq(0)
+      expect(revenue["revenue"]).to eq('0.0')
     end
   end
 end

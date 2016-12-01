@@ -9,7 +9,11 @@ class Api::V1::Items::SearchController < ApplicationController
   end
 
   def show
-    render json: Item.find_by(items_params)
+    if items_params[:unit_price]
+      render json: Item.find_by(unit_price: (params[:unit_price].to_f * 100).round.to_s)
+    else
+      render json: Item.find_by(items_params)
+    end
   end
 
   def random

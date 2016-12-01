@@ -90,7 +90,7 @@ describe "Items endpoint" do
       date = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(date).to eq(JSON.parse(invoice2.created_at.to_json))
+      expect(date['revenue']).to eq(JSON.parse(invoice2.created_at.to_json))
     end
   end
 
