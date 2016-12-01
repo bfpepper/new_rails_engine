@@ -46,15 +46,19 @@ Rails.application.routes.draw do
         get '/find_all', to: '/api/v1/items/search#index'
         get '/random', to: '/api/v1/items/search#random'
         get '/find', to: '/api/v1/items/search#show'
+        get '/most_revenue', to: '/api/v1/items/most_revenue#show'
+        get '/find_all', to: '/api/v1/items/search#index'
+        get '/random', to: '/api/v1/items/search#random'
+        get '/find', to: '/api/v1/items/search#show'
+        get '/most_items', to: '/api/v1/items/most_items#show'
       end
 
-      get '/items/most_revenue', to: '/api/v1/items/most_revenue#show'
-      get '/items/find_all', to: '/api/v1/items/search#index'
-      get '/items/random', to: '/api/v1/items/search#random'
-      get '/items/find', to: '/api/v1/items/search#show'
-      get '/items/most_items', to: '/api/v1/items/most_items#show'
       get '/items/:id/best_day', to: '/api/v1/items/best_day#show'
-      resources :items, only: [:index, :show]
+
+      resources :items, only: [:index, :show] do
+        get 'invoice_item', to: '/api/v1/invoice_items#index'
+        get '/merchant', to: '/api/v1/merchants#index'
+      end
 
       namespace :invoices do
         get '/find_all', to: '/api/v1/invoices/search#index'
@@ -78,7 +82,10 @@ Rails.application.routes.draw do
         get '/find', to: '/api/v1/invoice_items/search#show'
       end
 
-      resources :invoice_items, only: [:index, :show]
+      resources :invoice_items, only: [:index, :show] do
+        get '/invoice', to: '/api/v1/invoices#index'
+        get '/item', to: '/api/v1/items#index'
+      end
     end
   end
 
