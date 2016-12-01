@@ -18,6 +18,6 @@ context "GET /api/v1/merchants/revenue?date=x" do
     revenue = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(revenue).to eq(4)
+    expect(revenue["total_revenue"]).to eq('0.04')
   end
 end

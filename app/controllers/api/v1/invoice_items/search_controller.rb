@@ -9,7 +9,11 @@ class Api::V1::InvoiceItems::SearchController < ApplicationController
   end
 
   def show
-    render json:InvoiceItem.find_by(invoice_items_params)
+    if invoice_items_params[:unit_price]
+      render json: InvoiceItem.find_by(unit_price: (params[:unit_price].to_f * 100).round.to_s)
+    else
+      render json:InvoiceItem.find_by(invoice_items_params)
+    end
   end
 
   def random

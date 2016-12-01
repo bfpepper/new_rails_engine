@@ -27,7 +27,7 @@ context "It finds all records by a given param" do
 
   it "finds all records given a unit_price" do
 
-    create_list(:item, 3, unit_price: 4)
+    create_list(:item, 3, unit_price: (4/100))
 
     get "/api/v1/items/find_all?unit_price=4"
 
