@@ -50,6 +50,3 @@ context "It finds all records by a given param" do
     expect(items_list.count).to eq(3)
   end
 end
-
-
-#name, desc, unit_price, merchant_id
