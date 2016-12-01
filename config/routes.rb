@@ -45,6 +45,7 @@ Rails.application.routes.draw do
         get '/find', to: '/api/v1/items/search#show'
       end
 
+      get '/items/most_revenue', to: '/api/v1/items/most_revenue#show'
       get '/items/find_all', to: '/api/v1/items/search#index'
       get '/items/random', to: '/api/v1/items/search#random'
       get '/items/find', to: '/api/v1/items/search#show'
