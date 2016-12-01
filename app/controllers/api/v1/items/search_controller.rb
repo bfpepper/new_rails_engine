@@ -1,7 +1,11 @@
 class Api::V1::Items::SearchController < ApplicationController
 
   def index
-    render json: Item.where(items_params)
+    if items_params[:unit_price]
+      render json: Item.where(unit_price: items_params[:unit_price].to_f * 100)
+    else
+      render json: Item.where(items_params)
+    end
   end
 
   def show
