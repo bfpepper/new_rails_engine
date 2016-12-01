@@ -70,21 +70,27 @@ describe "Items endpoint" do
       expect(response).to be_success
       expect(item["unit_price"]).to eq((("#{items.unit_price}").to_f/100).to_s)
     end
-    # it "finds a item by created_at" do
-    #   get "/api/v1/items/find?created_at=#{items.created_at}"
-    #
-    #   item = JSON.parse(response.body)
-    #
-    #   expect(response).to be_success
-    #   expect(item["created_at"]).to eq(("#{items.created_at}").to_i)
-    # end
-    # it "finds a item by updated_at" do
-    #   get "/api/v1/items/find?updated_at=#{items.updated_at}"
-    #
-    #   item = JSON.parse(response.body)
-    #
-    #   expect(response).to be_success
-    #   expect(item["updated_at"]).to eq(("#{items.updated_at}").to_i)
-    # end
   end
+
+  context "GET /items/:id/best_day" do
+    it "returns the date with the most sales" do
+      invoice = create(:invoice)
+      invoice2 = create(:invoice, created_at: "2012-03-20T23:57:05.000Z".to_datetime)
+
+      create(:transaction, invoice: invoice)
+
+      item = create(:item)
+
+      create_list(:invoice_item, 3, invoice: invoice, quantity: 1, item: item)
+      create_list(:invoice_item, 4, invoice: invoice2, quantity: 1, item: item)
+
+      get "/api/v1/items/#{item.id}/best_day"
+
+      date = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(date).to eq(JSON.parse(invoice2.created_at.to_json))
+    end
+  end
+
 end
