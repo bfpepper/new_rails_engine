@@ -1,21 +1,17 @@
 class Api::V1::Items::SearchController < ApplicationController
 
   def index
-    if items_params[:unit_price]
-      render json: Item.where(unit_price: items_params[:unit_price].to_f * 100)
-    else
-      render json: Item.where(items_params)
-    end
+      render json: Item.where(filter)
+  end
+
+  def filter
+    filter = {}
+    filter[:unit_price] = (params[:unit_price].to_f * 100).round.to_s if params[:unit_price]
+    filter.merge!(items_params.to_h)
   end
 
   def show
-    if items_params[:unit_price]
-      render json: Item.find_by(unit_price: (params[:unit_price].to_f * 100).round.to_s)
-    elsif items_params[:created_at] || items_params[:updated_at]
-      render json: Item.where(items_params).order(:id).first
-    else
-      render json: Item.find_by(items_params)
-    end
+    render json: Item.where(filter).first
   end
 
   def random

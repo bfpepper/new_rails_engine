@@ -1,24 +1,21 @@
 class Api::V1::InvoiceItems::SearchController < ApplicationController
 
   def index
-    if invoice_items_params[:unit_price]
-      render json: InvoiceItem.where(unit_price: invoice_items_params[:unit_price].to_f*100)
-    else
-      render json: InvoiceItem.where(invoice_items_params)
-    end
+    render json: InvoiceItem.where(filter)
+  end
+
+  def filter
+    filter = {}
+    filter[:unit_price] = (params[:unit_price].to_f * 100).round.to_s if params[:unit_price]
+    filter.merge!(invoice_items_params.to_h)
   end
 
   def show
-    if invoice_items_params[:unit_price]
-      render json: InvoiceItem.find_by(unit_price: (params[:unit_price].to_f * 100).round.to_s)
-    else
-      render json:InvoiceItem.find_by(invoice_items_params)
-    end
+    render json: InvoiceItem.find_by(filter)
   end
 
   def random
-    offset = rand(InvoiceItem.count)
-    render json: InvoiceItem.offset(offset).first
+    render json: InvoiceItem.offset(rand(InvoiceItem.count)).first
   end
 
   private
