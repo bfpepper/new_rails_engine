@@ -8,6 +8,10 @@ class Api::V1::Transactions::SearchController < ApplicationController
     render json: Transaction.find_by(transaction_params)
   end
 
+  def random
+    render json: Transaction.offset(rand(Transaction.count)).first
+  end
+
   private
 
   def transaction_params
