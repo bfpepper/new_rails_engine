@@ -1,7 +1,7 @@
 class BestDaySerializer < ActiveModel::Serializer
-  attributes :revenue
+  attributes :best_day
 
-  def revenue
+  def best_day
     object
   end
 end
