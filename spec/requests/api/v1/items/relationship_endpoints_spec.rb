@@ -24,6 +24,6 @@ context "GET /api/v1/items/:id/Params" do
     returned_list = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(returned_list.count).to eq(1)
+    expect(returned_list['name']).to eq(merchant.name)
   end
 end

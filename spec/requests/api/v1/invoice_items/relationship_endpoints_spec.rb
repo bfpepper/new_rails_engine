@@ -11,7 +11,7 @@ context "GET /api/v1/invoice_items/:id/Params" do
     returned_invoice_items = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(returned_invoice_items.count).to eq(1)
+    expect(returned_invoice_items['id']).to eq(invoice.id)
   end
 
   it "finds all items for a given invoice_item" do
@@ -24,6 +24,6 @@ context "GET /api/v1/invoice_items/:id/Params" do
     returned_invoice_items = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(returned_invoice_items.count).to eq(1)
+    expect(returned_invoice_items['name']).to eq(item.name)
   end
 end
