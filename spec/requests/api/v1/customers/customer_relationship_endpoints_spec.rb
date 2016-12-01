@@ -15,4 +15,20 @@ describe "Customer Relationship Endpoints" do
       expect(invoices.count).to eq(2)
     end
   end
+
+  context "GET /customers/:id/transactions" do
+    it "can find customer transactions" do
+      customer = create(:customer)
+      invoice = create(:invoice, customer: customer)
+
+      create_list(:transaction, 2, invoice: invoice)
+
+      get "/api/v1/customers/#{customer.id}/transactions"
+
+      transactions = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(transactions.count).to eq(2)
+    end
+  end
 end
