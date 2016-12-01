@@ -4,9 +4,9 @@ context "GET /api/v1/items/:id/Params" do
   it "finds all invoice_items for a given item" do
 
     item = create(:item)
-    create_list(:invoice_item, 2, item_id: item.id)
+    create_list(:invoice_item, 2, item: item)
 
-    get "/api/v1/items/#{item.id}/invoice_item"
+    get "/api/v1/items/#{item.id}/invoice_items"
 
     returned_list = JSON.parse(response.body)
 

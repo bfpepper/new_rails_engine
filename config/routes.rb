@@ -55,10 +55,10 @@ Rails.application.routes.draw do
 
       get '/items/:id/best_day', to: '/api/v1/items/best_day#show'
 
-      resources :items, only: [:index, :show] do
-        get 'invoice_item', to: '/api/v1/invoice_items#index'
-        get '/merchant', to: '/api/v1/merchants#index'
-      end
+      resources :items, only: [:index, :show]
+      get '/items/:id/invoice_items', to: '/api/v1/items/invoice_items#index'
+      get '/items/:id/merchant', to: '/api/v1/merchants#index'
+
 
       namespace :invoices do
         get '/find_all', to: '/api/v1/invoices/search#index'
