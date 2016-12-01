@@ -78,6 +78,7 @@ describe "Items endpoint" do
       invoice2 = create(:invoice, created_at: "2012-03-20T23:57:05.000Z".to_datetime)
 
       create(:transaction, invoice: invoice)
+      create(:transaction, invoice: invoice2)
 
       item = create(:item)
 
@@ -90,6 +91,31 @@ describe "Items endpoint" do
 
       expect(response).to be_success
       expect(date).to eq(JSON.parse(invoice2.created_at.to_json))
+    end
+  end
+
+  context "GET /items/most_items?quantity=x" do
+    it "returns the date with the most sales" do
+      item1 = create(:item, name: "Bread")
+      item2 = create(:item, name: "Meat")
+      item3 = create(:item, name: "Cheese")
+
+      invoice = create(:invoice)
+
+      create(:transaction, invoice: invoice)
+
+      create_list(:invoice_item, 1, invoice: invoice, quantity: 1, item: item1)
+      create_list(:invoice_item, 2, invoice: invoice, quantity: 1, item: item2)
+      create_list(:invoice_item, 3, invoice: invoice, quantity: 1, item: item3)
+
+      quantity = 2
+      get "/api/v1/items/most_items?quantity=#{quantity}"
+
+      items = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(items.first['name']).to eq("Cheese")
+      expect(items.count).to eq(quantity)
     end
   end
 
