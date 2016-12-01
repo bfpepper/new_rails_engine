@@ -33,6 +33,9 @@ Rails.application.routes.draw do
       end
       resources :customers, only: [:index, :show] do
         get '/favorite_merchant', to: '/api/v1/customers/favorite_merchants#show'
+        scope module: 'customers' do
+          resources :invoices, only: [:index]
+        end
       end
 
       namespace :items do
