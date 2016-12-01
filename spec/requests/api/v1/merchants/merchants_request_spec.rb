@@ -46,24 +46,6 @@ describe "merchants endpoints" do
       expect(response).to be_success
       expect(merchants["name"]).to eq("Find me")
     end
-    it "finds a merchant based on created_at" do
-      skip
-      get "/api/v1/merchants/find?created_at=#{merchant.created_at}"
-
-      merchants = JSON.parse(response.body)
-
-      expect(response).to be_success
-      expect(merchants["name"]).to eq("Find me")
-    end
-    it "finds a merchant based on updated_at" do
-      skip
-      get "/api/v1/merchants/find?updated_at=#{merchant.updated_at}"
-
-      merchants = JSON.parse(response.body)
-
-      expect(response).to be_success
-      expect(merchants["name"]).to eq("Find me")
-    end
   end
 
   context "GET /merchants/most_revenue?quantity=x" do

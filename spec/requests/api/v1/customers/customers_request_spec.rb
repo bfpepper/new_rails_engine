@@ -13,7 +13,7 @@ describe "customers endpoints" do
       expect(customers.count).to eq(2)
     end
   end
-  context "GET /customer" do
+  context "GET /customers/:id" do
     it "returns one customer" do
       customer = create(:customer, first_name: "Danny", last_name: "Tanner")
 
@@ -26,7 +26,7 @@ describe "customers endpoints" do
     end
   end
 
-  context "GET /custoemrs/find" do
+  context "GET /customers/find" do
     let (:customers) { create(:customer) }
 
     it "finds a customer by id" do
@@ -53,21 +53,5 @@ describe "customers endpoints" do
       expect(response).to be_success
       expect(customer["last_name"]).to eq("#{customers.last_name}")
     end
-    # it "finds a customer by created_at" do
-    #   get "/api/v1/customers/find?created_at=#{customers.created_at}"
-    #
-    #   customer = JSON.parse(response.body)
-    #
-    #   expect(response).to be_success
-    #   expect(customer["created_at"]).to eq(("#{customers.created_at}").to_i)
-    # end
-    # it "finds a customer by updated_at" do
-    #   get "/api/v1/customers/find?updated_at=#{customers.updated_at}"
-    #
-    #   customer = JSON.parse(response.body)
-    #
-    #   expect(response).to be_success
-    #   expect(customer["updated_at"]).to eq(("#{customers.updated_at}").to_i)
-    # end
   end
 end
