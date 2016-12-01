@@ -53,11 +53,11 @@ Rails.application.routes.draw do
         get '/most_items', to: '/api/v1/items/most_items#show'
       end
 
+      get '/items/:id/merchant', to: '/api/v1/items/merchants#index'
       get '/items/:id/best_day', to: '/api/v1/items/best_day#show'
 
       resources :items, only: [:index, :show]
       get '/items/:id/invoice_items', to: '/api/v1/items/invoice_items#index'
-      get '/items/:id/merchant', to: '/api/v1/merchants#index'
 
 
       namespace :invoices do
