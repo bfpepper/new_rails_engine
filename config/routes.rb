@@ -83,8 +83,8 @@ Rails.application.routes.draw do
       end
 
       resources :invoice_items, only: [:index, :show] do
-        get '/invoice', to: '/api/v1/invoices#index'
-        get '/item', to: '/api/v1/items#index'
+        get '/invoice', to: '/api/v1/invoice_items/invoices#index'
+        get '/item', to: '/api/v1/invoice_items/items#index'
       end
     end
   end
