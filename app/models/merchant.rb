@@ -8,7 +8,7 @@ class Merchant < ApplicationRecord
   has_many :invoice_items,
     through: :invoices
 
-  def total_revenue(date)
+  def total_revenue(date=nil)
     if date.nil?
         invoices.joins(:transactions, :invoice_items)
         .merge(Transaction.successful)
